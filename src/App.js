@@ -21,8 +21,10 @@ class App extends Component{
     return (
       <div className="App">
         <input type="search" placeholder="search monsters" onChange={e => {
-          this.setState({searchFiled: e.target.value})
-          console.log(this.state)}}
+          this.setState({searchFiled: e.target.value}, () =>
+          console.log(this.state)
+          )
+        }}
         />
         <CardList monsters = {this.state.monsters} /> 
       </div>
