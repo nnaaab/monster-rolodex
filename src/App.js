@@ -10,23 +10,16 @@ class App extends Component{
       monsters:[],
       searchFiled: ''
     };
-    //我们自定义this的位置的时候，希望定义在constructor里，因为constructor是最先运行的
-    //bind 指的是，return一个新的function with this
-    //bind(this)的this是constructor里的这个this
-    //this.handleChange = this.handleChange.bind(this);
-
   }
 
-//因为extend了react的component，component里直接写好了箭头的this指向的是constructor
+
   componentDidMount() {
     fetch("https://jsonplaceholder.typicode.com/users")
     .then(response => response.json())
     .then(users => this.setState({monsters: users}))
   }
 
-//arrow function自动set the context of 'this' when the function is defined
-//当第一步在go through all functions时， 看到有个arrow function, 就会自动把this的
-//scope指向where the arrow function was defined的地方，也就是app component的地方
+
   handleChange = (e) => {
       this.setState({searchFiled: e.target.value});
   }
@@ -38,10 +31,9 @@ class App extends Component{
     );  
     return (
       <div className="App">
+        <h1>Monster Rolodex</h1>
         <SearchBox 
           placeholder = "search monsters"
-          //虽然这个this指向了handle change function，但是没有提供this.setState的this是什么,
-          //JS 不会提供scope，所以需要自己来定义这个this是在哪里
           handleChange = {this.handleChange} />
         <CardList monsters = {filteredMonsters} /> 
       </div>
