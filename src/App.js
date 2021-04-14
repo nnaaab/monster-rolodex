@@ -13,7 +13,7 @@ class App extends Component{
     //我们自定义this的位置的时候，希望定义在constructor里，因为constructor是最先运行的
     //bind 指的是，return一个新的function with this
     //bind(this)的this是constructor里的这个this
-    this.handleChange = this.handleChange.bind(this);
+    //this.handleChange = this.handleChange.bind(this);
 
   }
 
@@ -24,8 +24,10 @@ class App extends Component{
     .then(users => this.setState({monsters: users}))
   }
 
-//如果不写bind的话，会报错，这个this会return undefined
-  handleChange(e) {
+//arrow function自动set the context of 'this' when the function is defined
+//当第一步在go through all functions时， 看到有个arrow function, 就会自动把this的
+//scope指向where the arrow function was defined的地方，也就是app component的地方
+  handleChange = (e) => {
       this.setState({searchFiled: e.target.value});
   }
 
